@@ -1,0 +1,24 @@
+add the rest of metadata to Song (using the TagLib library)
+
+look into doing a crossfade or transistional fx and slowing/speeding song
+
+(for now have the time) add progress bar for song length and current time
+
+use the : command mode for possible commands (customization, utility, etc)
+
+add some way to store preferences like a cache (save volume setting, theme, etc)
+
+add shuffle mode (or play random from a directory)
+
+add ability to /search in the command prompt for file in list
+
+add a visualizer plugin (like CAVA)
+
+
+! app breaks when you resize terminal. see if there is a fix for this
+
+! look into handling the buffer better, sometimes gets weird breaks in audio
+
+! when trying to import many songs into playlist, program freezes, find a way to not freeze and add loading indicator
+
+! make sure that there are 0 memory leaks even when using the program for a while
