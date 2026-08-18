@@ -12,8 +12,9 @@ ifeq ($(OS),Windows_NT)
 		# set commands on windows
 		MKDIR = if not exist obj mkdir obj
 		RM = del /Q /F
-		RMDIR = rmdir /S /Q
-		TARGET_BIN = $(TARGET).exe
+		RMDIR = if exist obj rmdir /S /Q obj
+
+		EXE = .exe
 		CLEAN_OBJS = $(subst /,\\,$(OBJFILES))
 else
     LDFLAGS = -lpthread -lm -ldl -lncursesw
@@ -23,21 +24,23 @@ else
 		MKDIR = mkdir -p obj
 		RM = rm -f
 		RMDIR = rm -rf obj
-		TARGET_BIN = $(TARGET)
+		EXE =
 		CLEAN_OBJS = $(OBJFILES)
 endif
 
-all: $(TARGET)
+OUTPUT: $(TARGET)$(EXE)
 
-$(TARGET_BIN): $(OBJFILES)
-	$(CC) $(CFLAGS) -o $(TARGET_BIN) $(OBJFILES) $(LDFLAGS)
+all: $(OUTPUT)
+
+$(OUTPUT): $(OBJFILES)
+	$(CC) $(CFLAGS) -o $(OUTPUT) $(OBJFILES) $(LDFLAGS)
 
 obj/%.o: src/%.c
 	@$(MKDIR)
 	$(CC) $(CFLAGS) $(CURSES_INCLUDE) -c $< -o $@
 
 clean:
-	@$(RM) $(CLEAN_OBJS) $(TARGET_BIN) *~ 2>cfg_err || true
-	@$(RMDIR) 2>cfg_err || true
+	@$(RM) $(CLEAN_OBJS) $(OUTPUT) *~ 2>nul || true
+	@$(RMDIR) 2>nul || true
 
 .PHONY: all clean
