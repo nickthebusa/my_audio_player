@@ -7,7 +7,7 @@ TARGET = my_audio_player
 # detect OS
 ifeq ($(OS),Windows_NT)
     LDFLAGS = -lpthread -lm -L./pdcursesmod -lpdcurses
-    CURSES_INCLUDE = -I./pdcursesmod
+    CURSES_INCLUDE = -I
 
 		# set commands on windows
 		MKDIR = if not exist obj mkdir obj
