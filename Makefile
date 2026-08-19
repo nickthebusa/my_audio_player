@@ -11,12 +11,16 @@ ifeq ($(OS),Windows_NT)
 
 		# set commands on windows
 		MKDIR = if not exist obj mkdir obj
+		RM = del /Q /F
+		CLEAN_TARGET = obj\*.o $(TARGET).exe
 else
     LDFLAGS = -lpthread -lm -ldl -lncursesw
     CURSES_INCLUDE =
 
 		# set commands on unix
 		MKDIR = mkdir -p obj
+		RM = rm -rf
+		CLEAN_TARGET = $(OBJFILES) $(TARGET) *~
 endif
 
 all: $(TARGET)
@@ -29,6 +33,6 @@ obj/%.o: src/%.c
 	$(CC) $(CFLAGS) $(CURSES_INCLUDE) -c $< -o $@
 
 clean:
-	rm -f $(OBJFILES) $(TARGET) *~
+	$(RM) $(CLEAN_TARGET)
 
 .PHONY: all clean
