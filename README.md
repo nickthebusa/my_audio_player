@@ -15,5 +15,21 @@ The player is a section at the bottom that shows the file name, the current/tota
 Pressing space will toggle playing the song or pausing it, n will go to the next song, and p will go to the previous song.
 You can also seek forward and back using < and >.
 
-To run the program I named the executable "my_audio_player", then copied it to my binary files on linux.
-So you can download the code, run make then run the executable. (or move it to your path to run globally)
+dependencies:
+
+Unix:
+sudo apt install build-essential libncursesw5-dev   # Debian/Ubuntu
+sudo dnf install gcc make ncurses-devel              # Fedora
+sudo pacman -S base-devel ncurses                    # Arch
+brew install ncurses                                 # macOS
+
+Windows:
+download gcc compiler
+    - via msys2: https://www.msys2.org/
+    - via mingw-w64: https://www.mingw-w64.org/
+    - using chocolatey: choco install mingw 
+
+install git (for downloading the pdcursesmod library)
+    - installer: https://git-scm.com/install/
+    - winget: winget install --id Git.Git -e --source winget
+    - chocolatey: choco install git -y

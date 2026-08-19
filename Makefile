@@ -6,8 +6,8 @@ TARGET = my_audio_player
 
 # detect OS
 ifeq ($(OS),Windows_NT)
-    LDFLAGS = -lpthread -lm -L./pdcursesmod -lpdcurses
-    CURSES_INCLUDE = -I
+    LDFLAGS = -lpthread -lm -L./pdcursesmod/wincon -lpdcurses
+    CURSES_INCLUDE =
 
 		# set commands on windows
 		MKDIR = if not exist obj mkdir obj
@@ -23,7 +23,13 @@ else
 		CLEAN_TARGET = $(OBJFILES) $(TARGET) *~
 endif
 
-all: $(TARGET)
+all: pdcurses $(TARGET)
+
+pdcurses:
+ifeq ($(OS),Windows_NT)
+	@if not exist pdcursesmod git clone https://github.com/Bill-Gray/PDCursesMod.git pdcursesmod
+	@if not exist pdcursesmod\wincon\pdcurses.a $(MAKE) -C pdcursesmod\wincon -f Mingw32.mak
+endif
 
 $(TARGET): $(OBJFILES)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES) $(LDFLAGS)
@@ -35,4 +41,4 @@ obj/%.o: src/%.c
 clean:
 	$(RM) $(CLEAN_TARGET)
 
-.PHONY: all clean
+.PHONY: all clean pdcurses
