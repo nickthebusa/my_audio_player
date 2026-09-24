@@ -1,3 +1,7 @@
+add ability to /search in the command prompt for file in list
+
+add shuffle mode (or play random from a directory)
+
 add the rest of metadata to Song (using the TagLib library)
 
 look into doing a crossfade or transistional fx and slowing/speeding song
@@ -8,12 +12,10 @@ use the : command mode for possible commands (customization, utility, etc)
 
 add some way to store preferences like a cache (save volume setting, theme, etc)
 
-add shuffle mode (or play random from a directory)
-
-add ability to /search in the command prompt for file in list
-
 add a visualizer plugin (like CAVA)
 
+
+! fix makefile so that the app builds on linx, mac and windows
 
 ! app breaks when you resize terminal. see if there is a fix for this
 
